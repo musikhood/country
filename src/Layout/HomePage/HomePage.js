@@ -4,7 +4,6 @@ import { CountryBox } from "../../Components";
 
 function HomePage({
   allCountries,
-  setAllCountries,
   sortedCountries,
   setSortedCountries,
   searchCountries,
@@ -34,7 +33,9 @@ function HomePage({
 
   function handleInputChange() {
     const newRegion = sortedCountries.filter((country) =>
-      country.name.official.toLowerCase().includes(inputEl.current.value)
+      country.name.official
+        .toLowerCase()
+        .includes(inputEl.current.value.toLowerCase())
     );
     setSearchCountries(newRegion);
   }

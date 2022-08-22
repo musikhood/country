@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ProductPage.scss";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import arrow from "../../images/arrow-back-outline.svg";
 
 function ProductPage({ allCountries }) {
@@ -10,12 +10,25 @@ function ProductPage({ allCountries }) {
   let { name } = useParams();
   const url = "https://restcountries.com/v3.1/all";
   useEffect(() => {
+    load();
+  }, []);
+  useEffect(() => {
+    load();
+  }, [name]);
+
+  function load() {
+    setCurrentLanguages([]);
     if (allCountries.length === 0) {
       fetch(url)
         .then((response) => response.json())
         .then((res) => {
-          let country = res.filter((country) => country.name.common === name);
-
+          let country = res.filter(
+            (country) =>
+              country.cioc === name ||
+              country.cca2 === name ||
+              country.cca3 === name ||
+              country.ccn3 === name
+          );
           for (const [key, value] of Object.entries(country[0].languages)) {
             setCurrentLanguages((prevValue) => [...prevValue, value]);
           }
@@ -23,21 +36,36 @@ function ProductPage({ allCountries }) {
         });
     } else {
       let country = allCountries.filter(
-        (country) => country.name.common === name
+        (country) =>
+          country.cioc === name ||
+          country.cca2 === name ||
+          country.cca3 === name ||
+          country.ccn3 === name
       );
       for (const [key, value] of Object.entries(country[0].languages)) {
         setCurrentLanguages((prevValue) => [...prevValue, value]);
       }
       setCurrentItem(country);
     }
-  }, []);
+  }
+
+  function findCountry(id) {
+    let country = allCountries.filter(
+      (country) =>
+        country.cioc === id ||
+        country.cca2 === id ||
+        country.cca3 === id ||
+        country.ccn3 === id
+    );
+    return country[0]?.name.common;
+  }
 
   return (
     <div className="ProductPage">
       <div
         className="ProductPage__button"
         onClick={() => {
-          navigate(-1);
+          navigate("/");
         }}
       >
         <div className="ProductPage__button-img-container">
@@ -101,11 +129,17 @@ function ProductPage({ allCountries }) {
           <div className="ProductPage__border">
             Border Countries:{" "}
             <div className="ProductPage__border-container">
-              {currentItem[0]?.borders.map((item) => (
+              {currentItem[0]?.borders?.map((item) => (
+                <Link to={`/country/${item}`}>
+                  <div className="ProductPage__border-item">
+                    <p>{findCountry(item)}</p>
+                  </div>
+                </Link>
+              )) || (
                 <div className="ProductPage__border-item">
-                  <p>{item}</p>
+                  <p>none</p>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </div>

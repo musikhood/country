@@ -6,13 +6,13 @@ function CountryBox({ country }) {
   return (
     <div className="CountryBox">
       <div className="CountryBox__img-container">
-        <img src={country.flags.png} />
+        <Link to={`/country/${country.cioc}`}>
+          <img src={country.flags.png} />
+        </Link>
       </div>
       <div className="CountryBox__about-container">
         <h3>
-          <Link to={`/country/${country.name.common}`}>
-            {country.name.official}
-          </Link>
+          <Link to={`/country/${country.cioc}`}>{country.name.official}</Link>
         </h3>
         <p>
           Population: <span>{country.population.toLocaleString("en-US")}</span>

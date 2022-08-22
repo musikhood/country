@@ -29,7 +29,6 @@ function App() {
           element={
             <HomePage
               allCountries={allCountries}
-              setAllCountries={setAllCountries}
               sortedCountries={sortedCountries}
               setSortedCountries={setSortedCountries}
               searchCountries={searchCountries}

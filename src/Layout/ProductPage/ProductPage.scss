@@ -125,15 +125,21 @@
     justify-content: center;
     align-items: center;
     background-color: var(--elements);
-    color: var(--text);
     border-radius: 5px;
     box-shadow: 0 0 20px -10px #000;
     transition: all 0.2s ease-in-out;
+    color: var(--text);
+    text-decoration: none;
+    text-align: center;
+    &:hover {
+      background-color: var(--hover);
+    }
     p {
       opacity: 0.7;
     }
   }
   &__border-container {
+    max-width: 60rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
