@@ -1,27 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./HomePage.scss";
-import moonFilled from "../../images/moon.svg";
-import moon from "../../images/moon-outline.svg";
 import { CountryBox } from "../../Components";
 
-function HomePage({ theme, setTheme }) {
-  const url = "https://restcountries.com/v3.1/all";
+function HomePage({
+  allCountries,
+  setAllCountries,
+  sortedCountries,
+  setSortedCountries,
+  searchCountries,
+  setSearchCountries,
+}) {
   const [region, setRegion] = useState("Filter by region");
-  const [allCountries, setAllCountries] = useState([]);
-  const [sortedCountries, setSortedCountries] = useState([]);
-  const [searchCountries, setSearchCountries] = useState([]);
-  const inputEl = useRef(null);
 
-  useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-        setAllCountries(res);
-        setSortedCountries(res);
-        setSearchCountries(res);
-      });
-  }, []);
+  const inputEl = useRef(null);
 
   function handleChangeRegion(region1) {
     let newRegion;
@@ -50,20 +41,6 @@ function HomePage({ theme, setTheme }) {
 
   return (
     <div className="HomePage">
-      <div className="HomePage__nav">
-        <h1>Where in the world?</h1>
-        <div
-          className="HomePage__darkMode"
-          onClick={() => {
-            setTheme((prevValue) => !prevValue);
-          }}
-        >
-          <div className="HomePage__img-container">
-            <img src={theme ? moon : moonFilled} alt="" />
-          </div>
-          Dark Mode
-        </div>
-      </div>
       <div className="HomePage__searchBar">
         <div className="HomePage__input-container">
           <input

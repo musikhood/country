@@ -1,5 +1,6 @@
 import React from "react";
 import "./CountryBox.scss";
+import { Link } from "react-router-dom";
 
 function CountryBox({ country }) {
   return (
@@ -8,9 +9,13 @@ function CountryBox({ country }) {
         <img src={country.flags.png} />
       </div>
       <div className="CountryBox__about-container">
-        <h3>{country.name.official}</h3>
+        <h3>
+          <Link to={`/country/${country.name.common}`}>
+            {country.name.official}
+          </Link>
+        </h3>
         <p>
-          Population: <span>{country.population}</span>
+          Population: <span>{country.population.toLocaleString("en-US")}</span>
         </p>
         <p>
           Region: <span>{country.region}</span>

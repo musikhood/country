@@ -23,6 +23,11 @@
     transition: all 0.2s ease-in-out;
     h3 {
       margin-bottom: 20px;
+      a {
+        text-decoration: none;
+        color: var(--text);
+        transition: all 0.2s ease-in-out;
+      }
     }
     p {
       font-weight: 300;
