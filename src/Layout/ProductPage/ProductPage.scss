@@ -29,7 +29,7 @@
     margin-bottom: 5rem;
     border-radius: 10px;
     box-shadow: 0 0 20px -10px #000;
-    transition: all 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
     @media screen and (max-width: 1150px) {
       padding: 1rem 0;
       margin: 3rem 0 5rem;
@@ -43,7 +43,7 @@
     width: 2rem;
     height: 2rem;
     filter: var(--filter);
-    transition: all 0.2s ease-in-out;
+    transition: filter 0.2s ease-in-out;
     img {
       width: 100%;
     }
@@ -156,5 +156,27 @@
   }
   &__link {
     text-decoration: none;
+  }
+  &__loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30rem;
+    height: 30rem;
+    img {
+      width: 100%;
+      height: 100%;
+      animation: loader 2s infinite linear;
+    }
+  }
+}
+
+@keyframes loader {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

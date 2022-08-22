@@ -9,16 +9,17 @@ function App() {
   const [allCountries, setAllCountries] = useState([]);
   const [sortedCountries, setSortedCountries] = useState([]);
   const [searchCountries, setSearchCountries] = useState([]);
+  const [loaded, setLoaded] = useState(false);
   const url = "https://restcountries.com/v3.1/all";
 
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
         setAllCountries(res);
         setSortedCountries(res);
         setSearchCountries(res);
+        setLoaded(true);
       });
   }, []);
   return (
@@ -34,6 +35,7 @@ function App() {
               setSortedCountries={setSortedCountries}
               searchCountries={searchCountries}
               setSearchCountries={setSearchCountries}
+              loaded={loaded}
             />
           }
         />

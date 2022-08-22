@@ -31,7 +31,7 @@ function CountryBox({ country }) {
           Region: <span>{country.region}</span>
         </p>
         <p>
-          Capital: <span>{country.capital}</span>
+          Capital: <span>{country.capital ? country.capital : "none"}</span>
         </p>
       </div>
     </div>
