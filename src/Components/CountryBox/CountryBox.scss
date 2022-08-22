@@ -1,0 +1,34 @@
+.CountryBox {
+  width: 25rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px -10px #000;
+  &__img-container {
+    width: 100%;
+    height: 15rem;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__about-container {
+    height: 20rem;
+    background-color: var(--elements);
+    padding: 20px;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    transition: all 0.2s ease-in-out;
+    h3 {
+      margin-bottom: 20px;
+    }
+    p {
+      font-weight: 300;
+      span {
+        opacity: 0.7;
+      }
+    }
+  }
+}

@@ -1,21 +1,51 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./HomePage.scss";
 import moonFilled from "../../images/moon.svg";
 import moon from "../../images/moon-outline.svg";
+import { CountryBox } from "../../Components";
 
 function HomePage({ theme, setTheme }) {
   const url = "https://restcountries.com/v3.1/all";
   const [region, setRegion] = useState("Filter by region");
+  const [allCountries, setAllCountries] = useState([]);
+  const [sortedCountries, setSortedCountries] = useState([]);
+  const [searchCountries, setSearchCountries] = useState([]);
+  const inputEl = useRef(null);
+
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
+        setAllCountries(res);
+        setSortedCountries(res);
+        setSearchCountries(res);
       });
   }, []);
 
-  function handleChangeRegion(region) {
-    setRegion(region);
+  function handleChangeRegion(region1) {
+    let newRegion;
+    if (region1 === "All") {
+      newRegion = allCountries;
+    } else {
+      newRegion = allCountries.filter((item) => item.region === region1);
+    }
+    setSortedCountries(newRegion);
+    if (region1 !== region) {
+      setSearchCountries(newRegion);
+    }
+    setRegion(region1);
+  }
+
+  useEffect(() => {
+    handleInputChange();
+  }, [region]);
+
+  function handleInputChange() {
+    const newRegion = sortedCountries.filter((country) =>
+      country.name.official.toLowerCase().includes(inputEl.current.value)
+    );
+    setSearchCountries(newRegion);
   }
 
   return (
@@ -36,11 +66,22 @@ function HomePage({ theme, setTheme }) {
       </div>
       <div className="HomePage__searchBar">
         <div className="HomePage__input-container">
-          <input type="text" placeholder="Search for a country..." />
+          <input
+            onChange={() => handleInputChange()}
+            ref={inputEl}
+            type="text"
+            placeholder="Search for a country..."
+          />
         </div>
         <div className="HomePage__select-region">
           <div className="HomePage__options-container">
             <div className="HomePage__option">{region}</div>
+            <div
+              className="HomePage__option"
+              onClick={() => handleChangeRegion("All")}
+            >
+              All
+            </div>
             <div
               className="HomePage__option"
               onClick={() => handleChangeRegion("Africa")}
@@ -49,9 +90,9 @@ function HomePage({ theme, setTheme }) {
             </div>
             <div
               className="HomePage__option"
-              onClick={() => handleChangeRegion("America")}
+              onClick={() => handleChangeRegion("Americas")}
             >
-              America
+              Americas
             </div>
             <div
               className="HomePage__option"
@@ -61,9 +102,9 @@ function HomePage({ theme, setTheme }) {
             </div>
             <div
               className="HomePage__option"
-              onClick={() => handleChangeRegion("Europa")}
+              onClick={() => handleChangeRegion("Europe")}
             >
-              Europa
+              Europe
             </div>
             <div
               className="HomePage__option"
@@ -74,7 +115,11 @@ function HomePage({ theme, setTheme }) {
           </div>
         </div>
       </div>
-      <div className="HomePage__countries"></div>
+      <div className="HomePage__countries">
+        {searchCountries.map((country, index) => (
+          <CountryBox key={index} country={country} />
+        ))}
+      </div>
     </div>
   );
 }

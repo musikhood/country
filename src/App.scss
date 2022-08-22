@@ -8,8 +8,8 @@
   background-color: var(--backgroundColor);
   color: var(--text);
   width: 100vw;
-  height: 100vh;
-  transition: all 0.2s ease-in-out;
+  min-height: 100vh;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   &--light {
     --backgroundColor: var(--VeryLightGray);
     --elements: var(--White);

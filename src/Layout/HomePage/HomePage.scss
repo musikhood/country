@@ -10,6 +10,12 @@
     padding: 2rem 10rem;
     box-shadow: 0px -10px 20px 0px #000;
     transition: all 0.2s ease-in-out;
+    @media screen and (max-width: 740px) {
+      padding: 2rem 5rem;
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
   }
   &__darkMode {
     color: var(--text);
@@ -20,25 +26,41 @@
     font-weight: 600;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
+    @media screen and (max-width: 740px) {
+      font-size: 1.4rem;
+    }
   }
   &__img-container {
     width: 2rem;
     height: 2rem;
+
     img {
       width: 100%;
     }
   }
   &__searchBar {
     padding: 2rem 10rem;
-    margin-top: 5rem;
+    margin: 4rem 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media screen and (max-width: 900px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5rem;
+    }
+
+    @media screen and (max-width: 740px) {
+      padding: 2rem 5rem;
+    }
   }
   &__input-container {
     width: 40rem;
     height: 5rem;
     position: relative;
+    @media screen and (max-width: 740px) {
+      width: 100%;
+    }
     &::after {
       content: "";
       background-image: url("../../images/search.svg");
@@ -139,6 +161,17 @@
         background-color: var(--backgroundColor);
         transition: all 0.2s ease-in-out;
       }
+    }
+  }
+  &__countries {
+    padding: 2rem 10rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min-content, 25rem));
+    justify-content: space-between;
+    gap: 4rem;
+    @media screen and (max-width: 740px) {
+      justify-content: center;
+      padding: 2rem 5rem;
     }
   }
 }
