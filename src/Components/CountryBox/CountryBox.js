@@ -12,7 +12,7 @@ function CountryBox({ country }) {
       </div>
       <div className="CountryBox__about-container">
         <h3>
-          <Link to={`/country/${country.cioc}`}>{country.name.official}</Link>
+          <Link to={`/country/${country.cca2}`}>{country.name.official}</Link>
         </h3>
         <p>
           Population: <span>{country.population.toLocaleString("en-US")}</span>

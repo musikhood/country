@@ -130,7 +130,7 @@ function ProductPage({ allCountries }) {
             Border Countries:{" "}
             <div className="ProductPage__border-container">
               {currentItem[0]?.borders?.map((item) => (
-                <Link to={`/country/${item}`}>
+                <Link className="ProductPage__link" to={`/country/${item}`}>
                   <div className="ProductPage__border-item">
                     <p>{findCountry(item)}</p>
                   </div>
