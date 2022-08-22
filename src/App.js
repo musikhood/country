@@ -15,6 +15,7 @@ function App() {
     fetch(url)
       .then((response) => response.json())
       .then((res) => {
+        console.log(res);
         setAllCountries(res);
         setSortedCountries(res);
         setSearchCountries(res);

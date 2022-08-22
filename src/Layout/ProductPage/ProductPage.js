@@ -24,27 +24,38 @@ function ProductPage({ allCountries }) {
         .then((res) => {
           let country = res.filter(
             (country) =>
-              country.cioc === name ||
-              country.cca2 === name ||
-              country.cca3 === name ||
-              country.ccn3 === name
+              country?.cca2 === name ||
+              country?.cioc === name ||
+              country?.cca3 === name ||
+              country?.ccn3 === name
           );
-          for (const [key, value] of Object.entries(country[0].languages)) {
-            setCurrentLanguages((prevValue) => [...prevValue, value]);
+          console.log(country);
+          if (country[0]?.languages) {
+            for (const [key, value] of Object.entries(country[0]?.languages)) {
+              setCurrentLanguages((prevValue) => [...prevValue, value]);
+            }
+          } else {
+            setCurrentLanguages("none");
           }
+
           setCurrentItem(country);
         });
     } else {
       let country = allCountries.filter(
         (country) =>
-          country.cioc === name ||
-          country.cca2 === name ||
-          country.cca3 === name ||
-          country.ccn3 === name
+          country?.cioc === name ||
+          country?.cca2 === name ||
+          country?.cca3 === name ||
+          country?.ccn3 === name
       );
-      for (const [key, value] of Object.entries(country[0].languages)) {
-        setCurrentLanguages((prevValue) => [...prevValue, value]);
+      if (country[0]?.languages) {
+        for (const [key, value] of Object.entries(country[0]?.languages)) {
+          setCurrentLanguages((prevValue) => [...prevValue, value]);
+        }
+      } else {
+        setCurrentLanguages("none");
       }
+
       setCurrentItem(country);
     }
   }
@@ -52,10 +63,10 @@ function ProductPage({ allCountries }) {
   function findCountry(id) {
     let country = allCountries.filter(
       (country) =>
-        country.cioc === id ||
-        country.cca2 === id ||
-        country.cca3 === id ||
-        country.ccn3 === id
+        country?.cioc === id ||
+        country?.cca2 === id ||
+        country?.cca3 === id ||
+        country?.ccn3 === id
     );
     return country[0]?.name.common;
   }
@@ -84,11 +95,11 @@ function ProductPage({ allCountries }) {
               <p>
                 Native Name:{" "}
                 <span>
-                  {
-                    currentItem[0]?.name.nativeName[
-                      `${Object.keys(currentItem[0]?.name.nativeName)[0]}`
-                    ].common
-                  }
+                  {currentItem[0]?.name.nativeName
+                    ? currentItem[0]?.name.nativeName[
+                        `${Object.keys(currentItem[0]?.name.nativeName)[0]}`
+                      ].common
+                    : currentItem[0]?.name.common}
                 </span>
               </p>
               <p>
@@ -101,10 +112,20 @@ function ProductPage({ allCountries }) {
                 Region: <span>{currentItem[0]?.region}</span>
               </p>
               <p>
-                Sub Region: <span>{currentItem[0]?.subregion}</span>
+                Sub Region:{" "}
+                <span>
+                  {currentItem[0]?.subregion
+                    ? currentItem[0]?.subregion
+                    : "none"}
+                </span>
               </p>
               <p>
-                Capital: <span>{currentItem[0]?.capital[0]}</span>
+                Capital:{" "}
+                <span>
+                  {currentItem[0]?.capital
+                    ? currentItem[0]?.capital[0]
+                    : "none"}
+                </span>
               </p>
             </div>
             <div className="ProductPage__about-right">
@@ -114,15 +135,20 @@ function ProductPage({ allCountries }) {
               <p>
                 Currencies:{" "}
                 <span>
-                  {
-                    currentItem[0]?.currencies[
-                      `${Object.keys(currentItem[0]?.currencies)[0]}`
-                    ].name
-                  }
+                  {currentItem[0]?.currencies
+                    ? currentItem[0]?.currencies[
+                        `${Object.keys(currentItem[0]?.currencies)[0]}`
+                      ].name
+                    : "none"}
                 </span>
               </p>
               <p>
-                Languages: <span>{currentLanguages.join(", ")}</span>
+                Languages:{" "}
+                <span>
+                  {currentLanguages === "none"
+                    ? "none"
+                    : currentLanguages.join(", ")}
+                </span>
               </p>
             </div>
           </div>
