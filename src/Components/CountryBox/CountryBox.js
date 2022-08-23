@@ -11,7 +11,7 @@ function CountryBox({ country }) {
             country.cca2 || country.cioc || country.cca3 || country.ccn3
           }`}
         >
-          <img src={country.flags.png} />
+          <img src={country.flags.png} alt="" />
         </Link>
       </div>
       <div className="CountryBox__about-container">
