@@ -15,15 +15,14 @@ function CountryBox({ country }) {
         </Link>
       </div>
       <div className="CountryBox__about-container">
-        <h3>
-          <Link
-            to={`/country/${
-              country.cca2 || country.cioc || country.cca3 || country.ccn3
-            }`}
-          >
-            {country.name.official}
-          </Link>
-        </h3>
+        <Link
+          to={`/country/${
+            country.cca2 || country.cioc || country.cca3 || country.ccn3
+          }`}
+        >
+          {country.name.official}
+        </Link>
+
         <p>
           Population: <span>{country.population.toLocaleString("en-US")}</span>
         </p>
