@@ -1,6 +1,6 @@
 # Country app
 
-<!-- <img src="./giphy (2).gif" alt="gif"/> -->
+<img src="./giphy (2).gif" alt="gif"/> 
 
 ---
 
